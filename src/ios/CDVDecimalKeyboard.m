@@ -109,6 +109,14 @@ BOOL isAppInBackground=NO;
     [decimalButton removeFromSuperview];
     decimalButton=nil;
     stopSearching=NO;
+
+    [self evaluateJavaScript:@"DecimalKeyboard.isDecimal();"
+    completionHandler:^(NSString * _Nullable response, NSError * _Nullable error) {
+        BOOL isDecimal = [response isEqual:@"true"] || [response isEqual:@"1"];
+        if (isDecimal) {
+            [self addDecimalButton];
+        }
+    }];
     
 }
 - (void) deleteDecimalButton{
